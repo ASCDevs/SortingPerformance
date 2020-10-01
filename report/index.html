@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <script type="text/javascript" src="dataReport.json"></script>
+
+    <title>Relatórios</title>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Relatórios de Ordernação</h1>
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <h2>Informações Gerais</h2>
+                <p>Quantidade de Registros: <span id="value-reg"></span></p>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <h2>Gráfico Geral</h2>
+                <p>Relação Geral entre os Algoritmos</p>
+                <canvas id="chartTotal"></canvas>
+            </div>
+
+            <div class="col-md-6">
+
+                <h2>Velocidade</h2>
+                <p>Velocidade de Comparação de Cada Algoritmo</p>
+
+                <canvas id="chartVelocidade"></canvas>
+            </div>
+
+            <div class="col-md-6">
+
+                <h2>Movimentações</h2>
+                <p>Quantidade de movimentações de cada Algoritmo</p>
+                <canvas id="chartMovimentacao"></canvas>
+            </div>
+
+            <div class="col-md-6">
+
+                <h2>Comparações</h2>
+                <p>Quantidade de Comparações que aconteceu em cada Algoritmo</p>
+
+                <canvas id="chartComparacao"></canvas>
+            </div>
+
+            
+
+        </div>
+        
+    </div>
+
+    
+    <script>
+
+        var json = dataReport;
+
+        var ctxVelocidade = document.getElementById('chartVelocidade').getContext('2d');
+        var ctxMovimentacao = document.getElementById('chartMovimentacao').getContext('2d');
+        var ctxComparacao = document.getElementById('chartComparacao').getContext('2d');3
+        var ctxTotal = document.getElementById('chartTotal').getContext('2d');
+
+        document.getElementById('value-reg').innerHTML = json.quantidade;
+
+        var colorFillMerge = 'rgba(255, 122, 150, 0.3)';
+        var colorBorderMerge = 'rgb(255, 122, 150)';
+
+        var colorFillQuick = 'rgba(255, 173, 92, 0.3)';
+        var colorBorderQuick = 'rgb(255, 173, 92)';
+
+        var colorFillShell = 'rgba(102, 201, 201, 0.3)';
+        var colorBorderShell = 'rgb(102, 201, 201)';
+
+        
+        var chartVelocidade = new Chart(ctxVelocidade, {
+        type: 'bar',
+        data: {
+            labels: ['MergeSort', 'QuickSort', 'ShellSort'],
+            datasets: [{
+                barPercentage: 0.5,
+                barThickness: 6,
+                maxBarThickness: 8,
+                minBarLength: 20,
+                data: [json.tempos.tempoMerge, json.tempos.tempoQuick, json.tempos.tempoShell],
+                borderWidth: 1,
+                borderColor: [colorBorderMerge, colorBorderQuick, colorBorderShell],
+                backgroundColor: [colorFillMerge, colorFillQuick, colorFillShell],
+            }]
+        },
+        options: {
+             legend: {
+                display: false
+        },
+        scales: {
+                xAxes: [{
+                    gridLines: {
+                        offsetGridLines: true
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+        });
+
+        // MOVIMENTACAO
+
+        var chartMovimentacao = new Chart(ctxMovimentacao, {
+        type: 'bar',
+        data: {
+            labels: ['MergeSort', 'QuickSort', 'ShellSort'],
+            datasets: [{
+                barPercentage: 0.5,
+                barThickness: 6,
+                maxBarThickness: 8,
+                minBarLength: 20,
+                data: [json.movimentacoes.movMerge, json.movimentacoes.movQuick, json.movimentacoes.movShell],
+                borderWidth: 1,
+                borderColor: [colorBorderMerge, colorBorderQuick, colorBorderShell],
+                backgroundColor: [colorFillMerge, colorFillQuick, colorFillShell],
+            }]
+        },
+        options: {
+             legend: {
+                display: false
+        },
+        scales: {
+                xAxes: [{
+                    gridLines: {
+                        offsetGridLines: true
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+        });
+
+
+        // COMPARACAO
+
+        var chartComparacao = new Chart(ctxComparacao, {
+        type: 'bar',
+        data: {
+            labels: ['MergeSort', 'QuickSort', 'ShellSort'],
+            datasets: [{
+                barPercentage: 0.5,
+                barThickness: 6,
+                maxBarThickness: 8,
+                minBarLength: 20,
+                data: [json.comparacoes.compMerge, json.comparacoes.compQuick, json.comparacoes.compShell],
+                borderWidth: 1,
+                borderColor: [colorBorderMerge, colorBorderQuick, colorBorderShell],
+                backgroundColor: [colorFillMerge, colorFillQuick, colorFillShell],
+            }]
+        },
+        options: {
+             legend: {
+                display: false
+        },
+        scales: {
+                xAxes: [{
+                    gridLines: {
+                        offsetGridLines: true
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+        });
+
+        var mediaVelocidade = (json.tempos.tempoMerge + json.tempos.tempoQuick + json.tempos.tempoShell) / 3
+        var mediaMovimentacao = (json.movimentacoes.movMerge + json.movimentacoes.movQuick + json.movimentacoes.movShell) / 3
+        var mediaComparacao = (json.comparacoes.compMerge + json.comparacoes.compQuick + json.comparacoes.compShell) / 3
+
+        var comparacaoTotal = new Chart(ctxTotal, {
+            type: 'radar',
+            data: {
+                labels: ['Velocidade', 'Movimentações', 'Comparação'],
+                datasets: [
+                {
+                    label: 'MergeSort',
+                    borderColor: colorBorderMerge,
+                    backgroundColor: colorFillMerge,
+                    data: [
+                        (json.tempos.tempoMerge * 1000) / mediaVelocidade, 
+                        (json.movimentacoes.movMerge * 1000) / mediaMovimentacao, 
+                        (json.comparacoes.compMerge * 1000) / mediaComparacao
+                    ]
+                },
+                
+                {
+                    label: 'QuickSort',
+                    borderColor: colorBorderQuick,
+                    backgroundColor: colorFillQuick,
+                    data: [
+                        (json.tempos.tempoQuick * 1000) / mediaVelocidade, 
+                        (json.movimentacoes.movQuick * 1000) / mediaMovimentacao, 
+                        (json.comparacoes.compQuick * 1000) / mediaComparacao
+                    ]
+                },
+
+                {
+                    label: 'ShellSort',
+                    borderColor: colorBorderShell,
+                    backgroundColor: colorFillShell,
+                    data: [
+                        (json.tempos.tempoShell * 1000) / mediaVelocidade, 
+                        (json.movimentacoes.movShell * 1000) / mediaMovimentacao, 
+                        (json.comparacoes.compShell * 1000) / mediaComparacao
+                    ]
+                }
+                ]
+            },
+            options: {
+
+                scale: {
+                angleLines: {
+                    display: true
+                },
+                ticks: {
+                    display: false,
+                    maxTicksLimit: 10
+                }
+            }
+            }
+        });
+
+
+    </script>
+
+
+</body>
+
+
+
+</html>

@@ -28,9 +28,10 @@ void menu(){
         
         puts("------Performance-de-Ordenacao------");
         puts("1 - Testes Ordernacao");
-        //puts("2 - Merge Sort");
-        //puts("3 - Quick Sort");
-        //puts("4 - Shell Sort");
+        //puts("1 - Ordernar numeros digitados")
+        //puts("2 - Ordenar vetores randomicos");
+        //puts("3 - Ordenar vetores semi orndenados");
+        //puts("4 - Ordenar vetores ja ordenado");
         puts("0 - Sair");
         scanf("%c",&opcao);
 
@@ -90,17 +91,17 @@ void encaminhaOpcaoDados(char op){
             break;
         case '3':
             system("cls");
-            geraVetor(vetorIntP,500,"random");
+            geraVetor(vetorInt,500,"random");
             system("pause");
             break;
         case '4':
             system("cls");
-            geraVetor(vetorIntM,5000,"random");
+            geraVetor(vetorInt,5000,"random");
             system("pause");
             break;
         case '5':
             system("cls");
-            geraVetor(vetorIntG,100000,"random");
+            geraVetor(vetorInt,100000,"random");
             system("pause");
             break;
         case '6':

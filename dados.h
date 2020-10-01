@@ -1,9 +1,7 @@
 #include <time.h>
 #include <stdio.h>
 
-int *vetorIntP; //500
-int *vetorIntM; //50000
-int *vetorIntG; //100000
+int *vetorInt; //Vetor auxiliar de entradas
 
 //Declaracao das funcoes
 void encaminhaOpcaoVetor(char escolha);

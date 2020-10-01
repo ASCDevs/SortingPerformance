@@ -12,7 +12,9 @@ int movimentacoes=0;
 #include "dados.h"
 
 void menu();
-void encaminhaOpcao(char op);
+void encaminhaOpcaoDoMenu(char op);
+void encaminhaOpcaoGeral(char op, char tipo[]);
+void menuGeralVetor(char tipoVetor[]);
 
 int main(){
 
@@ -27,15 +29,14 @@ void menu(){
     do{
         
         puts("------Performance-de-Ordenacao------");
-        puts("1 - Testes Ordernacao");
-        //puts("1 - Ordernar numeros digitados")
-        //puts("2 - Ordenar vetores randomicos");
-        //puts("3 - Ordenar vetores semi orndenados");
-        //puts("4 - Ordenar vetores ja ordenado");
+        puts("1 - Ordernar numeros digitados");
+        puts("2 - Ordenar vetores randomicos");
+        puts("3 - Ordenar vetores semi orndenados");
+        puts("4 - Ordenar vetores ja ordenado");
         puts("0 - Sair");
         scanf("%c",&opcao);
 
-        encaminhaOpcao(opcao);
+        encaminhaOpcaoDoMenu(opcao);
         
         system("cls||clear");
 
@@ -45,69 +46,73 @@ void menu(){
     system("pause");
 }
 
-void encaminhaOpcao(char op){
+void encaminhaOpcaoDoMenu(char op){
 
     switch (op){
         case '1':
             system("cls||clear");
-            menuTestesOrdenacao();
-            break;
-    }
-}
-
-
-void menuTestesOrdenacao(){
-
-    char op;
-
-    do{
-        system("cls||clear");
-        puts("1 - Digitar numeros");
-        puts("2 - Ler arquivo txt");
-        puts("3 - Dados randomicos (500 inteiros)");
-        puts("4 - Dados randomicos (50000 inteiros)");
-        puts("5 - Dados randomicos (100000 inteiros)");
-        puts("6 - Digitar quantidade de numeros randomicos");
-        puts("0 - Voltar");
-        scanf("%c",&op);
-        encaminhaOpcaoDados(op);
-
-    }while(op!='0');
-}
-
-void encaminhaOpcaoDados(char op){
-
-    switch (op){
-        case '1':
-            system("cls");
             lerEntradaUser();
             puts("");
             system("pause");
             break;
         case '2':
+            system("cls||clear");
+            menuGeralVetor("randomicos");
+            puts("");
+            break;
+        case '3':
+            system("cls||clear");
+            menuGeralVetor("semi ordenados");
+            puts("");
+            break;
+        case '4':
+            system("cls||clear");
+            menuGeralVetor("ordenados");
+            puts("");
+            break;
+
+    }
+}
+
+void menuGeralVetor(char tipoVetor[]){
+    char op;
+    do{
+        system("cls||clear");
+        printf("1 - Dados %s (20000 inteiros)",tipoVetor);
+        printf("\n2 - Dados %s (60000 inteiros)",tipoVetor);
+        printf("\n3 - Dados %s (120000 inteiros)",tipoVetor);
+        printf("\n4 - Ordenar N quantidade de numeros %s",tipoVetor);
+        puts("\n0 - Voltar");
+        scanf("%c",&op);
+
+        encaminhaOpcaoGeral(op,tipoVetor);
+
+    }while(op!='0');
+}
+
+void encaminhaOpcaoGeral(char op, char tipo[]){
+
+    switch (op){
+        case '1':
             system("cls");
-            lerArquivo();
+            geraVetor(vetorInt,20000,tipo);
+            system("pause");
+            break;
+        case '2':
+            system("cls");
+            geraVetor(vetorInt,60000,tipo);
             system("pause");
             break;
         case '3':
             system("cls");
-            geraVetor(vetorInt,500,"random");
+            geraVetor(vetorInt,120000,tipo);
             system("pause");
             break;
         case '4':
             system("cls");
-            geraVetor(vetorInt,5000,"random");
+            entradaUserRandom(tipo);
             system("pause");
             break;
-        case '5':
-            system("cls");
-            geraVetor(vetorInt,100000,"random");
-            system("pause");
-            break;
-        case '6':
-            system("cls");
-            entradaUserRandom();
-            system("pause");
-            break;
+
     }
 }

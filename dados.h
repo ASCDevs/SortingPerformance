@@ -1,21 +1,20 @@
 #include <time.h>
 #include <stdio.h>
+#include <string.h> // funcao strncmp() referencia: http://cplusplus.com/reference/cstring/strncmp/?kw=strncmp
 
 int *vetorInt; //Vetor auxiliar de entradas
 
 //Declaracao das funcoes
-void encaminhaOpcaoVetor(char escolha);
-void menuVetoresVariados();
 void geraVetor(int vetor[],int tamanho,char tipoEntrada[]);
 
-void entradaUserRandom();
+void entradaUserRandom(char tipo[]);
 void lerEntradaUser();
 void lerArquivo();
-void menuTestesOrdenacao();
-void encaminhaOpcaoDados(char op);
 void salvaResultados(int vetor[], int tamanho, int tipo);
 
 int randomNumeros(int vetor[],int tamanho);
+int randomSemiOrdenado(int vetor[], int tamanho);
+int randomOrdenado(int vetor[], int tamanho);
 
 struct relatorio {
 	int quantidade;
@@ -81,28 +80,40 @@ void lerEntradaUser(){
 
 }
 
-void entradaUserRandom(){
+void entradaUserRandom(char tipo[]){
 
     int tamanho;
-    printf("Quantidade de numeros randomicos: ");
+    printf("ESTA GERANDO RANDOMICOS APENAS\n");
+    printf("Quantidade de numeros %s: ",tipo);
     scanf("%d",&tamanho);
     int *nums;
 
+    //encaminha tipo de geração de vetor
     geraVetor(nums,tamanho,"userRandom");
 }
 
 void geraVetor(int vetor[],int tamanho, char tipoEntrada[]){
 
+
     int tamanhoExibicao;
     //Verifica se é entrada por usuario ou randomico
-    if(tipoEntrada == "random"){
+    if(strncmp(tipoEntrada,"randomicos",11)==0){
 
         vetor = (int* )malloc(tamanho * sizeof(int));
         
         randomNumeros(vetor,tamanho);
         printf("RESULTADO DE VALORES RANDOMICOS - tamanho vetor: %d",tamanho);
+        tamanhoExibicao = 300;
 
-        tamanhoExibicao = 500;
+    }else if(strncmp(tipoEntrada,"semi ordenados",15)==0){
+        puts("Semi ordenado selecionado");
+
+        system("pause");
+        return;
+    }else if(strncmp(tipoEntrada,"ordenados",10)==0){
+        puts("Ordenado selecionado");
+        system("pause");
+        return;
     }else if(tipoEntrada == "user"){
         vetor = (int* )malloc(tamanho * sizeof(int));
         
@@ -124,7 +135,7 @@ void geraVetor(int vetor[],int tamanho, char tipoEntrada[]){
             tamanhoExibicao = tamanho;
         }
     }
-    
+
 
     //declara variaveis de tempo
     clock_t tMerge,tQuick,tShell;
@@ -271,11 +282,18 @@ void salvaResultados(int vetor[], int tamanho, int tipo){
 	}
 }
 
-
 int randomNumeros(int vetor[], int tamanho){
     srand((unsigned)time(NULL));
    
     for(int i=0;i<tamanho;i++){
         vetor[i] = rand()%1000 +1; // de 1 a 100    
     }
+}
+
+int randomSemiOrdenado(int vetor[], int tamanho){
+
+}
+
+int randomOrdenado(int vetor[], int tamanho){
+
 }

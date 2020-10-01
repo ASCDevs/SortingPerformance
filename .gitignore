@@ -33,3 +33,7 @@
 
 #Visual Studio Code
 .vscode/
+.vs/
+
+#Arquivo dataReport para relatorio em grafico
+dataReport.json

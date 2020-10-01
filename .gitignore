@@ -36,4 +36,4 @@
 .vs/
 
 #Arquivo dataReport para relatorio em grafico
-dataReport.json
+report/dataReport.json

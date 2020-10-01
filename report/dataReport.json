@@ -1,6 +1,6 @@
 dataReport = {
-quantidade: 5000,
-tempos: {'tempoMerge': 0.000000, 'tempoQuick': 0.015000, 'tempoShell': 0.000000},
- movimentacoes: { 'movMerge': 138613, 'movQuick': 25200, 'movShell': 115270},
-comparacoes: { 'compMerge': 66807, 'compQuick': 88650, 'compShell': 61845}
+quantidade: 20000,
+tempos: {'tempoMerge': 0.006000, 'tempoQuick': 0.005000, 'tempoShell': 0.005000},
+ movimentacoes: { 'movMerge': 634461, 'movQuick': 122014, 'movShell': 544843},
+comparacoes: { 'compMerge': 307231, 'compQuick': 401183, 'compShell': 284541}
  }

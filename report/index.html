@@ -26,6 +26,8 @@
             <div class="col-md-12">
                 <h2>Informações Gerais</h2>
                 <p>Quantidade de Registros: <span id="value-reg"></span></p>
+                <p>Tipo de vetor: <span id="value-tipo"></span></p>
+
             </div>
 
         </div>
@@ -80,6 +82,7 @@
         var ctxTotal = document.getElementById('chartTotal').getContext('2d');
 
         document.getElementById('value-reg').innerHTML = json.quantidade;
+        document.getElementById('value-tipo').innerHTML = json.tipovetor;
 
         var colorFillMerge = 'rgba(255, 122, 150, 0.3)';
         var colorBorderMerge = 'rgb(255, 122, 150)';

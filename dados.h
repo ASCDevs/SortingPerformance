@@ -14,10 +14,10 @@ void salvaResultados(int vetor[], int tamanho, int tipo);
 
 int randomNumeros(int vetor[],int tamanho);
 int randomSemiOrdenado(int vetor[], int tamanho);
-int randomOrdenado(int vetor[], int tamanho);
 
 struct relatorio {
 	int quantidade;
+    char tipovetor[15];
     float tMerge;
 	float tQuick;
 	float tShell;
@@ -83,37 +83,45 @@ void lerEntradaUser(){
 void entradaUserRandom(char tipo[]){
 
     int tamanho;
-    printf("ESTA GERANDO RANDOMICOS APENAS\n");
+    
     printf("Quantidade de numeros %s: ",tipo);
     scanf("%d",&tamanho);
     int *nums;
 
     //encaminha tipo de geração de vetor
-    geraVetor(nums,tamanho,"userRandom");
+    geraVetor(nums,tamanho,tipo);
 }
 
 void geraVetor(int vetor[],int tamanho, char tipoEntrada[]){
 
 
     int tamanhoExibicao;
+
+    if(tamanho >300){
+        tamanhoExibicao = 300;
+    }else{
+        tamanhoExibicao = tamanho;
+    }
     //Verifica se é entrada por usuario ou randomico
     if(strncmp(tipoEntrada,"randomicos",11)==0){
 
         vetor = (int* )malloc(tamanho * sizeof(int));
-        
         randomNumeros(vetor,tamanho);
         printf("RESULTADO DE VALORES RANDOMICOS - tamanho vetor: %d",tamanho);
-        tamanhoExibicao = 300;
-
+        
     }else if(strncmp(tipoEntrada,"semi ordenados",15)==0){
-        puts("Semi ordenado selecionado");
 
-        system("pause");
-        return;
+        vetor = (int* )malloc(tamanho * sizeof(int));
+        randomSemiOrdenado(vetor,tamanho);
+        printf("RESULTADO DE VALORES SEMI ORDENADOS - tamanho vetor: %d",tamanho);
+        
     }else if(strncmp(tipoEntrada,"ordenados",10)==0){
-        puts("Ordenado selecionado");
-        system("pause");
-        return;
+
+        vetor = (int* )malloc(tamanho * sizeof(int));
+        randomNumeros(vetor,tamanho);
+        quickSort(vetor,0,tamanho-1);
+        printf("RESULTADO DE VALORES JA ORDENADOS - tamanho vetor: %d",tamanho);
+
     }else if(tipoEntrada == "user"){
         vetor = (int* )malloc(tamanho * sizeof(int));
         
@@ -123,18 +131,16 @@ void geraVetor(int vetor[],int tamanho, char tipoEntrada[]){
         }
         system("cls");
         printf("RESULTADO DE ENTRADA PELO USUARIO - tamanho vetor: %d",tamanho);
-        tamanhoExibicao = tamanho;
-    }else if(tipoEntrada == "userRandom"){
+        
+    }/*else if(tipoEntrada == "userRandom"){
         system("cls");
         vetor = (int* )malloc(tamanho * sizeof(int));
         randomNumeros(vetor,tamanho);
         printf("RESULTADO DE ENTRADA PELO USUARIO (RANDOMICO) - tamanho vetor: %d",tamanho);
-        if(tamanho>=300){
-            tamanhoExibicao = 300;
-        }else{
+        if(tamanho<300){
             tamanhoExibicao = tamanho;
         }
-    }
+    }*/
 
 
     //declara variaveis de tempo
@@ -211,6 +217,7 @@ void geraVetor(int vetor[],int tamanho, char tipoEntrada[]){
     relatorio relatorioDados;
     
     relatorioDados.quantidade = tamanho;
+    strcpy(relatorioDados.tipovetor, tipoEntrada);
     
     relatorioDados.tMerge = tempoMerge;
 	relatorioDados.tQuick = tempoQuick;
@@ -237,6 +244,7 @@ void gerarRelatorio(relatorio relatorioDados) {
     
     fprintf(arquivo, "dataReport = {\n");
     fprintf(arquivo, "quantidade: %d,\n", relatorioDados.quantidade);
+    fprintf(arquivo, "tipovetor: \"%s\",\n", relatorioDados.tipovetor);
     fprintf(arquivo, "tempos: {'tempoMerge': %f, 'tempoQuick': %f, 'tempoShell': %f},\n ", relatorioDados.tMerge, relatorioDados.tQuick, relatorioDados.tShell);
     fprintf(arquivo, "movimentacoes: { 'movMerge': %d, 'movQuick': %d, 'movShell': %d},\n", relatorioDados.movMerge, relatorioDados.movQuick, relatorioDados.movShell);
     fprintf(arquivo, "comparacoes: { 'compMerge': %d, 'compQuick': %d, 'compShell': %d}\n ", relatorioDados.comparaMerge, relatorioDados.comparaQuick, relatorioDados.comparaShell);
@@ -291,9 +299,20 @@ int randomNumeros(int vetor[], int tamanho){
 }
 
 int randomSemiOrdenado(int vetor[], int tamanho){
+    srand((unsigned)time(NULL));
+    int parte = 0;
+    int aux = 0;
 
-}
+    for(int i=0;i<tamanho;i++){
 
-int randomOrdenado(int vetor[], int tamanho){
+        if((i/10)!=parte){
 
+            aux +=10;
+            vetor[i] = rand()%10 + (aux+1); //Valores de aux+1 a aux+10
+            parte = i/10;
+
+        }else{
+            vetor[i] = rand()%10 + (aux+1); //Valores de aux+1 a aux+10
+        }
+    }
 }

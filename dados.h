@@ -132,15 +132,7 @@ void geraVetor(int vetor[],int tamanho, char tipoEntrada[]){
         system("cls");
         printf("RESULTADO DE ENTRADA PELO USUARIO - tamanho vetor: %d",tamanho);
         
-    }/*else if(tipoEntrada == "userRandom"){
-        system("cls");
-        vetor = (int* )malloc(tamanho * sizeof(int));
-        randomNumeros(vetor,tamanho);
-        printf("RESULTADO DE ENTRADA PELO USUARIO (RANDOMICO) - tamanho vetor: %d",tamanho);
-        if(tamanho<300){
-            tamanhoExibicao = tamanho;
-        }
-    }*/
+    }
 
 
     //declara variaveis de tempo

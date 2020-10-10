@@ -34,5 +34,6 @@
 #Visual Studio Code
 .vscode/
 
-#Arquivo dataReport para relatorio em grafico
-report/dataReport.json
+#Pastas com conteudos a serem ignorados
+report/
+arquivos/

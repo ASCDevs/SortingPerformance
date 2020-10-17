@@ -159,6 +159,9 @@ void geraVetor(int vetor[],int tamanho, char tipoEntrada[]){
     //limpa o buffer
     setbuf(stdin,NULL);
 
+    comparacoes = 0;
+    movimentacoes = 0;
+
     //Marca os tempos e chama os métodos de ordenação
     tMerge = clock();
     mergeSort(vMerge,tamanho);

@@ -1,7 +1,7 @@
 dataReport = {
 quantidade: 120000,
-tipovetor: "ordenados",
-tempos: {'tempoMerge': 0.024000, 'tempoQuick': 0.012000, 'tempoShell': 0.012000},
- movimentacoes: { 'movMerge': 5324436, 'movQuick': 615143, 'movShell': 1862866},
-comparacoes: { 'compMerge': 4855208, 'compQuick': 2330379, 'compShell': 28}
+tipovetor: "randomicos",
+tempos: {'tempoMerge': 0.047000, 'tempoQuick': 0.031000, 'tempoShell': 0.032000},
+ movimentacoes: { 'movMerge': 4417853, 'movQuick': 913780, 'movShell': 4087536},
+comparacoes: { 'compMerge': 2148927, 'compQuick': 2657389, 'compShell': 2224698}
  }

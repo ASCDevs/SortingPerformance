@@ -34,6 +34,6 @@
 #Visual Studio Code
 .vscode/
 
-#Pastas com conteudos a serem ignorados
-report/
+#Arquivos que podem ser ignorados
 arquivos/
+report/dataReport.json

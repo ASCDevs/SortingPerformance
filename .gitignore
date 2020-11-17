@@ -31,9 +31,9 @@
 *.out
 *.app
 
-#Visual Studio Code
+# Visual Studio Code
 .vscode/
 
-#Arquivos que podem ser ignorados
+# Arquivos que podem ser ignorados
 arquivos/
 report/dataReport.json
